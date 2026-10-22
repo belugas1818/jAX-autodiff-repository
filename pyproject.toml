@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jax-diffusion"
+version = "0.1.0"
+description = "Score-based diffusion in JAX with validated train/sample/likelihood APIs."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "jax>=0.4.30",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.8"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+jax-diffusion = "jax_diffusion.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["jax_diffusion*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
