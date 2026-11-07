@@ -11,10 +11,6 @@ make_spec / DataSpec
 sample_reverse_sde, denoise_one_shot, log_likelihood
     Inference primitives.
 """
-import os # noqa: F401
-import sys # noqa: F401
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from jax_diffusion.config import DenoiseReport, ExperimentResult, TrainConfig
 from jax_diffusion.data import DataSpec, make_spec

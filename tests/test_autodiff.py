@@ -1,4 +1,4 @@
-"""Production tests of the autodiff experiments in jax_test.py."""
+"""Tests of the JVP, VJP, and Hessian helpers in jax_diffusion.autodiff."""
 
 import jax.numpy as jnp
 from jax import jacfwd, jacrev, jvp, random, vjp, vmap

@@ -1,6 +1,6 @@
 """JVP / VJP helpers used by the diffusion loss and likelihood.
 
-These are the production form of the autodiff experiments in jax_test.py.
+Same ideas as `autodiff_tools`, trimmed to the calls this package makes.
 """
 
 from __future__ import annotations

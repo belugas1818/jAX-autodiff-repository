@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "jax-diffusion"
+name = "jax-study"
 version = "0.1.0"
-description = "Score-based diffusion in JAX with validated train/sample/likelihood APIs."
+description = "JAX study repo: autodiff tools, a Monte Carlo option pricer, and a score-based diffusion model."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -16,15 +16,17 @@ dependencies = [
 [project.optional-dependencies]
 plot = ["matplotlib>=3.8"]
 dev = ["pytest>=8.0"]
+nn = ["equinox>=0.11", "optax>=0.2"]
 
 [project.scripts]
 jax-diffusion = "jax_diffusion.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["jax_diffusion*"]
+include = ["autodiff_tools*", "mc_options*", "jax_diffusion*"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["autodiff_tools", "tests"]
+pythonpath = ["."]
 addopts = "-q"
 filterwarnings = [
     "ignore::DeprecationWarning",

@@ -16,8 +16,7 @@ The modules import each other as `jax_diffusion.<module>`, so run commands
 from the folder **above** this one:
 
 ```bash
-cd "real projs"
-pip install jax numpy matplotlib      # requirements.txt is currently empty
+pip install -e ".[dev,plot]"
 python -m jax_diffusion --data points2d --steps 4000 --plot roll.png
 ```
 
@@ -94,9 +93,9 @@ vector `v`, and `|J·v|²` is a cheap (Hutchinson) estimate of how sharp the
 network is. That is the `jac` term, weighted by `jac_weight`.
 
 ### 4. [autodiff.py](autodiff.py): JVP/VJP helpers
-These are reusable forms of the autodiff tricks from `jax_test.py`:
-Hessian-vector products, Hutchinson trace estimators, and an exact Jacobian
-trace. `likelihood.py` uses the trace functions.
+Hessian-vector products, a Hutchinson trace estimate, and an exact Jacobian
+trace. `likelihood.py` uses the trace functions. The same ideas, written out
+with derivations, are in `autodiff_tools`.
 
 ### 5. [optim.py](optim.py): Adam from scratch
 - `adam_init` / `adam_update`: Adam written with `jax.tree.map`, so it works
@@ -143,11 +142,7 @@ It returns an `ExperimentResult`.
 - [plotting.py](plotting.py): scatter plot for 2D data, line plots for anything else
 - [\_\_init\_\_.py](__init__.py): the public API
 
-### Side file: [jax_test.py](jax_test.py)
-A scratchpad that follows the JAX autodiff tutorial: `grad`, `value_and_grad`,
-finite-difference checks, Hessian-vector products, and `vmap`'d Jacobian
-products. The package doesn't import it. If `jvp`/`vjp` are new to you, read
-it **before** `loss.py` and `autodiff.py`.
+Read `autodiff_tools` before `loss.py` and `autodiff.py` if `jvp` and `vjp` are new.
 
 ---
 

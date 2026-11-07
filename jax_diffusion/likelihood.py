@@ -51,6 +51,9 @@ def log_likelihood(params, key, x0, n_steps: int = 200, exact: bool = True):
         return (x, lp), None
 
     keys = random.split(key, n_steps)
-    (x_t, int_div), _ = lax.scan(rk4, (x0, jnp.float32(0.0)), (ts[:-1], ts[1:], keys))
+    # Match x0. A hardcoded float32 makes the scan carry disagree with a
+    # float64 divergence when 64-bit mode is on.
+    log_density = jnp.zeros((), dtype=x0.dtype)
+    (x_t, int_div), _ = lax.scan(rk4, (x0, log_density), (ts[:-1], ts[1:], keys))
     log_p_t = -0.5 * jnp.sum(x_t ** 2) - 0.5 * d * jnp.log(2 * jnp.pi)
     return log_p_t + int_div
